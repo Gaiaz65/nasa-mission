@@ -1,4 +1,5 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatCommonModule } from '@angular/material/core';
 import { MatStepperModule } from '@angular/material/stepper';
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
@@ -22,6 +23,9 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatBadgeModule } from '@angular/material/badge';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
   imports: [
@@ -48,6 +52,10 @@ import { MatBadgeModule } from '@angular/material/badge';
     MatSnackBarModule,
     MatBadgeModule,
     MatStepperModule,
+    MatCommonModule,
+    MatSliderModule,
+    MatGridListModule,
+    MatRadioModule,
   ],
   exports: [
     MatButtonModule,
@@ -73,6 +81,10 @@ import { MatBadgeModule } from '@angular/material/badge';
     MatSnackBarModule,
     MatBadgeModule,
     MatStepperModule,
+    MatCommonModule,
+    MatSliderModule,
+    MatGridListModule,
+    MatRadioModule,
   ],
 })
 export class MaterialModule {}

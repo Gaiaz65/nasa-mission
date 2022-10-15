@@ -1,19 +1,53 @@
-<section style="opacity: 0.7;">
-  <form #f="ngForm">
+<section>
+  <form [formGroup]="imageLoadingForm" (ngSubmit)="loadPhotos()">
     <mat-card>
-      <mat-card-title>Rover</mat-card-title>
-      <mat-card-content>
-        <button mat-raised-button *ngFor="let option of roverOptions">{{option}}</button>
-        <mat-form-field appearance="fill"  matBadgeColor="accent" color="accent">
-        </mat-form-field>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-raised-button color="accent" type="submit">Start</button>
-      </mat-card-actions>
+      <mat-card-title>Select the rover</mat-card-title>
+      <hr>
+      <mat-radio-group [formControl]="roverType">
+        <mat-radio-button [value]="option" color="accent" *ngFor="let option of roverOptions" (click)="getInitialInfo(option)">{{option}}</mat-radio-button>
+      </mat-radio-group>
     </mat-card>
-  </form>
+
+    <mat-card *ngIf="maxSol" >
+      <ng-container >
+        <mat-card-title>Choose a Martian Day</mat-card-title>
+        <hr>
+        <mat-card-title>{{chosenDate.value}}/{{maxSol}}</mat-card-title>
+        <hr>
+        <mat-card-content>
+        <mat-slider [formControl]="chosenDate" #f tickInterval="500" step="1" min="0" [max]="maxSol"></mat-slider>
+        </mat-card-content>
+          <button mat-raised-button color="accent" (click)="confirmSol(chosenDate.value)" [disabled]="f.value<=0" type="button">Confirm the sol</button>
+      </ng-container>
+    </mat-card>
+
+    <mat-card *ngIf="cameras.length>0;else loading">
+        <mat-card-title>Select the camera</mat-card-title>
+        <hr>
+        <mat-radio-group [formControl]="chosenCamera">
+          <mat-radio-button mat-raised-button [value]="camera" color="accent" *ngFor="let camera of cameras"
+            type="submit">{{camera}}</mat-radio-button>
+        </mat-radio-group>
+        <mat-card-content>
+              <button  mat-raised-button color="accent" *ngFor="let camera of cameras" type="submit">{{camera}}</button>
+        </mat-card-content>
+    </mat-card>
+    </form>
 </section>
 
 
-<!-- <mat-spinner color="accent"></mat-spinner> -->
+<mat-grid-list cols="8" rowWidth="100%">
+  <mat-grid-tile *ngFor="let image of cameraImages;let i = index" colspan="{{(i+1) % 8 == 0 ? 2 : 1}}" rowspan="{{(i+1) % 8 == 0 ? 2 : 1}}">
+    <img [src]="image.img_src">
+  </mat-grid-tile>
+</mat-grid-list>
+
+
+
+<button mat-raised-button color="primary" *ngIf="cameraImages.length>=25">load more pictures...</button>
+
+<ng-template #loading>
+  <mat-spinner color="accent" *ngIf="isLoading"></mat-spinner>
+</ng-template>
+
 
