@@ -4,7 +4,7 @@
     <mat-grid-list [cols]="cols" [gutterSize]="'0.5rem'">
       <mat-grid-tile  *ngFor="let image of missionPhotos;let i = index"
        >
-        <img [src]="image.img_src">
+        <img [src]="image.img_src" crossorigin>
       </mat-grid-tile>
     </mat-grid-list>
   </ng-container>
