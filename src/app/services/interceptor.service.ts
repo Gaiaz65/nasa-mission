@@ -10,8 +10,6 @@ import { environment } from 'src/environments/environment';
 export class APIInterceptorService implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
-
-
     const apiReq = req.clone({ url: `${req.url+environment.api}` });
     return next.handle(apiReq);
   }

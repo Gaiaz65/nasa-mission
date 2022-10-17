@@ -46,6 +46,7 @@ export class MissionImagesComponent implements OnInit, OnDestroy {
         Breakpoints.Large,
         Breakpoints.XLarge,
       ])
+      .pipe(takeUntil(this.destroySubscriptions$))
       .subscribe((result) => {
         if (result.matches) {
           if (result.breakpoints[Breakpoints.XSmall]) {
@@ -85,6 +86,9 @@ export class MissionImagesComponent implements OnInit, OnDestroy {
             panelClass: ['red-snackbar'],
           }
         );
+      },
+      () => {
+        this.mService.isLoading.next(false);
       }
     );
   }
@@ -94,7 +98,6 @@ export class MissionImagesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.destroySubscriptions$.next(false);
     this.subscribeForImages();
   }
 

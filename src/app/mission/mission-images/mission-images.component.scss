@@ -24,7 +24,7 @@ mat-grid-tile {
     transform: scale(1.2);
     border: cyan 1px solid;
     border-radius: 5px;
-    z-index: 100;
+    z-index: 99;
   }
   @media (width<768px) {
     column-span: 2;
@@ -43,6 +43,7 @@ button {
   position: fixed;
   right: 3rem;
   bottom: 1rem;
+  z-index: 100;
 }
 
 img {

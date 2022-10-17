@@ -18,7 +18,6 @@ export class MissionService {
 
   constructor(private http: HttpClient) {}
   httpReqest: string = 'https://api.nasa.gov/mars-photos/api/v1/';
-
   photosRequest: string = '';
   pageRequest: string = `&page=${this.page}`;
 

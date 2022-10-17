@@ -17,6 +17,7 @@ export class MissionFormComponent implements OnDestroy {
   initialSub: Subscription = new Subscription();
   roverOptions = ['Curiosity', 'Opportunity', 'Spirit'];
   maxSol: number = 0;
+
   daysPhotoInfo: SingleDayInfo[] = [];
   cameras: string[] = [];
 
@@ -45,7 +46,8 @@ export class MissionFormComponent implements OnDestroy {
         this.daysPhotoInfo = photos;
         this.mService.isLoading.next(false);
       },
-      () => {
+      (error) => {
+        this.mService.isLoading.next(false);
         this.snackBar.open(
           'There is an unexpected issue. Check the connection.',
           'Ok',
@@ -54,7 +56,6 @@ export class MissionFormComponent implements OnDestroy {
             panelClass: ['red-snackbar'],
           }
         );
-        this.mService.isLoading.next(false);
       }
     );
   }
@@ -62,6 +63,7 @@ export class MissionFormComponent implements OnDestroy {
   confirmSol(e?: Event) {
     this.cameras = [];
     this.mService.SingleDayPhotos.next(null);
+    this.chosenCamera.reset();
     if (this.chosenDate.value > this.maxSol) {
       this.chosenDate.patchValue(this.maxSol);
       this.snackBar.open(
@@ -95,7 +97,8 @@ export class MissionFormComponent implements OnDestroy {
   reset() {
     this.maxSol = 0;
     this.cameras = [];
-    this.chosenDate.patchValue(0);
+    this.chosenDate.reset();
+    this.chosenCamera.reset();
     this.mService.SingleDayPhotos.next(null);
   }
 
