@@ -4,14 +4,11 @@
       "source": "/api/(.*)",
       "headers": [
         { "key": "Access-Control-Allow-Origin", "value": "*" },
-<<<<<<< HEAD
-        { "key": "Access-Control-Allow-Methods", "value": "GET,OPTIONS,PATCH,DELETE,POST,PUT" },
-=======
-        { "key": "Access-Control-Allow-Methods", "value": "GET" },
-        { "key": "Cross-Origin-Embedder-Policy", "value": "require-corp" }
->>>>>>> 5a0091a61f3ed30dbc752aece1eee8e3afada9fd
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET,OPTIONS,PATCH,DELETE,POST,PUT"
+        }
       ]
     }
   ]
 }
-
