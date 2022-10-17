@@ -1,27 +1,27 @@
 # NasaMission
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.6.
+As the proverb says:"Better safe than sorry". Same here, before talking on the deadline, better look inside the API:)
 
-## Development server
+Main config:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+        "@angular/cli": "~13.3.6",
+        
+        "@angular/cdk": "^13.3.9",
+        
+        "@angular/flex-layout": "^13.0.0-beta.38",
+        
+        "@angular/material": "^13.3.9",
+        
+Instalation instructions: 
 
-## Code scaffolding
+Make pull request via console:
+git clone https://github.com/Gaiaz65/nasa-mission.git
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
+- In the repository folder terminal write "npm install"
+- After instalation hit "npm start or ng serve"
+- Go to http://localhost:4200/ in your browser (or ather URL, better double check)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Or just make the pull request to check the source and [click here](https://nasa-mission.vercel.app/mission)
+![](https://github.com/Gaiaz65/nasa-mission/blob/main/src/assets/GitRep/Screenshot%202022-10-17%20at%2007.01.42.png?raw=true)
+![](https://github.com/Gaiaz65/nasa-mission/blob/main/src/assets/GitRep/Screenshot%202022-10-17%20at%2007.02.04.png?raw=true)
