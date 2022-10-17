@@ -1,13 +1,10 @@
 {
   "headers": [
     {
-      "source": "/api/(.*)",
+      "source": "/(.*)",
       "headers": [
-        { "key": "Access-Control-Allow-Origin", "value": "*" },
-        {
-          "key": "Access-Control-Allow-Methods",
-          "value": "GET,OPTIONS,PATCH,DELETE,POST,PUT"
-        }
+        { "key": "Cross-Origin-Opener-Policy", "value": "*" },
+        { "key": "Cross-Origin-Embedder-Policy", "value": "false" }
       ]
     }
   ]
