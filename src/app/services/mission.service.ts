@@ -1,35 +1,53 @@
-import { FormGroup } from '@angular/forms';
-import { SingleDayPhotos } from './../models/mission-manifest.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs';
+import { BehaviorSubject, map } from 'rxjs';
+
+import {
+  SingleDayPhoto,
+  SingleDayPhotos,
+} from './../models/mission-manifest.model';
 import MissionManifest from '../models/mission-manifest.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MissionService {
+  page = 0;
+  SingleDayPhotos = new BehaviorSubject<SingleDayPhoto[] | null>(null);
+  isLoading = new BehaviorSubject<boolean>(false);
+
   constructor(private http: HttpClient) {}
   httpReqest: string = 'https://api.nasa.gov/mars-photos/api/v1/';
-  apiKey: string = '=bfgT5a4x7Uagom6duaIqavIlsPClQK9gvW1mnQAi';
+  apiKey: string = 'api_key=bfgT5a4x7Uagom6duaIqavIlsPClQK9gvW1mnQAi';
+  photosRequest: string = '';
+  pageRequest: string = `&page=${this.page}`;
 
   load(roverInfo: string) {
-    let requestBody: string = `manifests/${roverInfo}/?api_key`;
+    let requestBody: string = `manifests/${roverInfo}/?`;
     return this.http
       .get<MissionManifest>(this.httpReqest + requestBody + this.apiKey)
       .pipe(
         map((manifest) => {
-          console.log(manifest);
           return manifest.photo_manifest;
         })
       );
   }
 
-  loadPhotos(roverType:string, chosenDate:number, chosenCamera:string, page?:number) {
-    let defaultPage:number = 1;
-    let roverInfo = roverType.toLowerCase()
-    let cameraInfo = chosenCamera.toLowerCase()
-    let photosRequest: string = `${this.httpReqest}/rovers/${roverInfo}/photos?sol=${chosenDate}&camera=${cameraInfo}&page=${page}&api_key${this.apiKey}`;
-    return this.http.get<SingleDayPhotos>(photosRequest);
+  createPhotosRequest(
+    roverType: string,
+    chosenDate: number,
+    chosenCamera: string
+  ) {
+    this.photosRequest = `${this.httpReqest}/rovers/${roverType}/photos?sol=${chosenDate}&camera=${chosenCamera}`;
+  }
+
+  loadPhotos() {
+    this.page++;
+    this.pageRequest = `&page=${this.page}`;
+    this.pageRequest = `${this.pageRequest}&${this.apiKey}`;
+
+    return this.http.get<SingleDayPhotos>(
+      this.photosRequest + this.pageRequest
+    );
   }
 }
