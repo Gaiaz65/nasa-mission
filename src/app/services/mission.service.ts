@@ -18,14 +18,14 @@ export class MissionService {
 
   constructor(private http: HttpClient) {}
   httpReqest: string = 'https://api.nasa.gov/mars-photos/api/v1/';
-  apiKey: string = 'api_key=bfgT5a4x7Uagom6duaIqavIlsPClQK9gvW1mnQAi';
+
   photosRequest: string = '';
   pageRequest: string = `&page=${this.page}`;
 
   load(roverInfo: string) {
     let requestBody: string = `manifests/${roverInfo}/?`;
     return this.http
-      .get<MissionManifest>(this.httpReqest + requestBody + this.apiKey)
+      .get<MissionManifest>(this.httpReqest + requestBody )
       .pipe(
         map((manifest) => {
           return manifest.photo_manifest;
@@ -44,7 +44,7 @@ export class MissionService {
   loadPhotos() {
     this.page++;
     this.pageRequest = `&page=${this.page}`;
-    this.pageRequest = `${this.pageRequest}&${this.apiKey}`;
+    this.pageRequest = `${this.pageRequest}&`;
 
     return this.http.get<SingleDayPhotos>(
       this.photosRequest + this.pageRequest

@@ -7,11 +7,12 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MissionImagesComponent } from './mission/mission-images/mission-images.component';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 import { MissionFormComponent } from './mission/mission-form/mission-form.component';
 import { MissionComponent } from './mission/mission.component';
+import { APIInterceptorService } from './services/interceptor.service';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,13 @@ import { MissionComponent } from './mission/mission.component';
     FormsModule,
     HttpClientModule,
   ],
-  providers: [],
   bootstrap: [AppComponent],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: APIInterceptorService,
+      multi: true,
+    },
+  ],
 })
 export class AppModule {}
