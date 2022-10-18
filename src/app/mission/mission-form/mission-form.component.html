@@ -52,14 +52,22 @@
     <mat-card-title>{{roverType.value}} {{cameras.length>1? 'cameras':'camera'}} on the {{chosenDate.value}} sol
     </mat-card-title>
 
-    <mat-radio-group [formControl]="chosenCamera" [value]="chosenCamera.value" fxHide.xs fxHide.xs required>
+    <mat-radio-group
+    [formControl]="chosenCamera"
+    [value]="chosenCamera.value"
+    fxHide.xs
+    required>
       <mat-radio-button color="primary" *ngFor="let camera of cameras" type="submit" [value]="camera">{{camera}}
       </mat-radio-button>
     </mat-radio-group>
 
     <mat-form-field appearance="fill" color="primary" fxHide.gt-xs>
       <mat-label>Camera</mat-label>
-      <mat-select color="primary" [value]="chosenCamera.value" [formControl]="chosenCamera" required>
+      <mat-select
+      [value]="chosenCamera.value"
+      [formControl]="chosenCamera"
+      color="primary"
+      required>
         <mat-option *ngFor="let camera of cameras" type="submit" [value]="camera">
           {{camera}}</mat-option>
       </mat-select>
