@@ -3,6 +3,7 @@ import {
   HttpInterceptor,
   HttpRequest,
   HttpHandler,
+  HttpParams,
 } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
@@ -10,11 +11,13 @@ import { environment } from 'src/environments/environment';
 export class APIInterceptorService implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
+    let apiParams: HttpParams = new HttpParams().append('api_key', environment.api);
     const apiReq = req.clone({
-      url: `${req.url + environment.api}`,
+      url: `${req.url}`,
+      params: apiParams,
     });
 
-    return next.handle(apiReq,);
+    return next.handle(apiReq);
   }
 }
 

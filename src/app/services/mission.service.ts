@@ -43,7 +43,6 @@ export class MissionService {
   loadPhotos() {
     this.page++;
     this.pageRequest = `&page=${this.page}`;
-    this.pageRequest = `${this.pageRequest}&`;
 
     return this.http.get<SingleDayPhotos>(
       this.photosRequest + this.pageRequest
